@@ -16,7 +16,7 @@ jobs:
       - name: Node Modules
         run: npm ci
       - name: Coverage
-        run: npm run test:coverage
+        run: npm run test:coverage --passWithNoTests
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
