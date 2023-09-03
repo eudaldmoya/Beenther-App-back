@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import debug from "debug";
 import { type NextFunction, type Request, type Response } from "express";
-import type CustomError from "../../CustomError/CustomError";
+import type CustomError from "../../CustomError/CustomError.js";
 
 const generalErrorHandler = (
   error: CustomError,
