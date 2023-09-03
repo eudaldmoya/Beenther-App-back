@@ -1,4 +1,5 @@
 import debugCreator from "debug";
+import "dotenv/config.js";
 import app from "./index.js";
 
 const debug = debugCreator("destinations:server:start");
