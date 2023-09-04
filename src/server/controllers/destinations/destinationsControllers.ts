@@ -14,9 +14,12 @@ export const getDestinations = async (
 ) => {
   try {
     const { _id } = req.body;
+
     const destinations = await Destination.find<DestinationStructure[]>({
       user: _id,
-    }).exec();
+    })
+      .limit(10)
+      .exec();
 
     res.status(200).json({ destinations });
   } catch (error: unknown) {
