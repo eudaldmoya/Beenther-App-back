@@ -5,8 +5,8 @@ export interface DestinationStructure {
   description: string;
   location: string;
   country: string;
-  hImageUrl: string;
-  vImageUrl: string;
+  horizontalImageUrl: string;
+  verticalImageUrl: string;
   isVisited: boolean;
   user: Schema.Types.ObjectId;
 }
