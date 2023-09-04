@@ -1,4 +1,5 @@
-interface Destination {
+import { type Schema } from "mongoose";
+export interface DestinationStructure {
   _id: string;
   name: string;
   description: string;
@@ -7,6 +8,11 @@ interface Destination {
   hImageUrl: string;
   vImageUrl: string;
   isVisited: boolean;
+  user: Schema.Types.ObjectId;
 }
 
-export default Destination;
+export interface UserStructure {
+  _id: string;
+  name: string;
+  authId: string;
+}
