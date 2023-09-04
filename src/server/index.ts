@@ -3,7 +3,6 @@ import express from "express";
 import morgan from "morgan";
 import pingController from "./controllers/pingController/pingController.js";
 import endpointNotFound, { generalErrorHandler } from "./middlewares/errors.js";
-import authMiddleware from "./middlewares/auth.js";
 
 const corsConfig = {
   origin: [process.env.ALLOW_ORIGIN_PROD!, process.env.ALLOW_ORIGIN_LOCAL!],
@@ -17,7 +16,7 @@ app.use(cors(corsConfig));
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.get("/", authMiddleware, pingController);
+app.get("/", pingController);
 
 app.use(endpointNotFound);
 app.use(generalErrorHandler);
