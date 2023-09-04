@@ -47,6 +47,7 @@
     "firebase": "^10.3.1",
     "firebase-admin": "^11.10.1",
     "jest-ts-webcompat-resolver": "^1.0.0",
+    "mongodb-memory-server": "^8.15.1",
     "mongoose": "^7.5.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1",
