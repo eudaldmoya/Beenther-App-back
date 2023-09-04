@@ -3,7 +3,7 @@ import Destination from "../../../database/models/Destination";
 import CustomError from "../../CustomError/CustomError";
 
 export const getDestinations = async (
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -13,7 +13,7 @@ export const getDestinations = async (
     res.status(200).json({ destinations });
   } catch (error: unknown) {
     const customError = new CustomError(
-      "Could not retrieve destinations",
+      "Could not retrieve the destinations",
       404,
       (error as Error).message,
     );
