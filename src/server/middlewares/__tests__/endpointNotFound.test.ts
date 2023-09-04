@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
 import CustomError from "../../CustomError/CustomError";
-import endpointNotFound from "./endpointNotFound";
+import { endpointNotFound } from "../errors";
 
 describe("Given an endpointNotFound middleware", () => {
   describe("When it receives a next function", () => {
