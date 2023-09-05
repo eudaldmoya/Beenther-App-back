@@ -35,7 +35,7 @@ afterAll(async () => {
 
 describe("Given a GET /destinations endpoint", () => {
   describe("When it receives a request", () => {
-    test("Then it should respond with a status 200 and the array of destinations", async () => {
+    test("Then it should respond with a status 200 and the destinations ", async () => {
       const path = "/destinations";
       const expectedStatus = 200;
 
