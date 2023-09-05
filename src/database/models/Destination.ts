@@ -17,11 +17,11 @@ const destinationSchema = new Schema({
     type: String,
     required: true,
   },
-  hImageUrl: {
+  horizontalImageUrl: {
     type: String,
     required: true,
   },
-  vImageUrl: {
+  verticalImageUrl: {
     type: String,
     required: true,
   },

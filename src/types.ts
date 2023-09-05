@@ -1,4 +1,3 @@
-import { type Schema } from "mongoose";
 export interface DestinationStructure {
   _id: string;
   name: string;
@@ -8,7 +7,7 @@ export interface DestinationStructure {
   horizontalImageUrl: string;
   verticalImageUrl: string;
   isVisited: boolean;
-  user: Schema.Types.ObjectId;
+  user: string;
 }
 
 export interface UserStructure {
