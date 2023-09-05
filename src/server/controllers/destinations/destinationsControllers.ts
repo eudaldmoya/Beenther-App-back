@@ -1,7 +1,10 @@
 import { type NextFunction, type Request, type Response } from "express";
-import Destination from "../../../database/models/Destination";
-import CustomError from "../../CustomError/CustomError";
-import { type UserStructure, type DestinationStructure } from "../../../types";
+import Destination from "../../../database/models/Destination.js";
+import CustomError from "../../CustomError/CustomError.js";
+import {
+  type UserStructure,
+  type DestinationStructure,
+} from "../../../types.js";
 
 export const getDestinations = async (
   req: Request<
@@ -13,7 +16,7 @@ export const getDestinations = async (
   next: NextFunction,
 ) => {
   try {
-    const { _id } = req.body;
+    const _id = req.body;
 
     const destinations = await Destination.find<DestinationStructure[]>({
       user: _id,

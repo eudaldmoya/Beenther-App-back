@@ -26,9 +26,7 @@ const authMiddleware = async (
       authId: uid,
     }).exec();
 
-    req.body = {
-      _id: user?._id,
-    };
+    req.body = user?._id;
 
     next();
   } catch (error) {
