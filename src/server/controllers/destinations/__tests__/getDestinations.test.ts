@@ -1,22 +1,16 @@
-import { type NextFunction, type Request, type Response } from "express";
+import { type NextFunction, type Response } from "express";
 import Destination from "../../../../database/models/Destination";
 import { destinationsMock } from "../../../../mocks/destinationsMock";
 import CustomError from "../../../CustomError/CustomError";
+import { type AuthRequest } from "../../../types";
 import { getDestinations } from "../destinationsControllers";
-import { type UserStructure } from "../../../../types";
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
 
 describe("Given a getDestinations controller", () => {
-  const req: Partial<
-    Request<
-      Record<string, unknown>,
-      Record<string, unknown>,
-      Partial<UserStructure>
-    >
-  > = {
+  const req: Partial<AuthRequest> = {
     body: {
       _id: "",
     },
@@ -36,29 +30,13 @@ describe("Given a getDestinations controller", () => {
     test("Then it should respond with status 200", async () => {
       const expectedStatusCode = 200;
 
-      await getDestinations(
-        req as Request<
-          Record<string, unknown>,
-          Record<string, unknown>,
-          Partial<UserStructure>
-        >,
-        res as Response,
-        next,
-      );
+      await getDestinations(req as AuthRequest, res as Response, next);
 
       expect(res.status).toHaveBeenCalledWith(expectedStatusCode);
     });
 
     test("Then the json method of the response should be called with the list of destinations", async () => {
-      await getDestinations(
-        req as Request<
-          Record<string, unknown>,
-          Record<string, unknown>,
-          Partial<UserStructure>
-        >,
-        res as Response,
-        next,
-      );
+      await getDestinations(req as AuthRequest, res as Response, next);
 
       expect(res.json).toHaveBeenCalledWith({ destinations: destinationsMock });
     });
@@ -77,15 +55,7 @@ describe("Given a getDestinations controller", () => {
         json: jest.fn(),
       };
 
-      await getDestinations(
-        req as Request<
-          Record<string, unknown>,
-          Record<string, unknown>,
-          Partial<UserStructure>
-        >,
-        res as Response,
-        next,
-      );
+      await getDestinations(req as AuthRequest, res as Response, next);
 
       expect(next).toHaveBeenCalledWith(customError);
     });
