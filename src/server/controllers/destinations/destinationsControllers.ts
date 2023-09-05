@@ -1,22 +1,16 @@
-import { type NextFunction, type Request, type Response } from "express";
+import { type NextFunction, type Response } from "express";
 import Destination from "../../../database/models/Destination.js";
+import { type DestinationStructure } from "../../../types.js";
 import CustomError from "../../CustomError/CustomError.js";
-import {
-  type UserStructure,
-  type DestinationStructure,
-} from "../../../types.js";
+import { type AuthRequest } from "../../types.js";
 
 export const getDestinations = async (
-  req: Request<
-    Record<string, unknown>,
-    Record<string, unknown>,
-    Partial<UserStructure>
-  >,
+  req: AuthRequest,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    const _id = req.body;
+    const _id = req.userId;
 
     const destinations = await Destination.find<DestinationStructure[]>({
       user: _id,

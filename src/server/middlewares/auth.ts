@@ -1,12 +1,13 @@
-import { type NextFunction, type Response, type Request } from "express";
-import CustomError from "../CustomError/CustomError.js";
+import { type NextFunction, type Response } from "express";
 import admin from "firebase-admin";
-import firebaseApp from "../../firebase.js";
 import User from "../../database/models/User.js";
+import firebaseApp from "../../firebase.js";
 import { type UserStructure } from "../../types.js";
+import CustomError from "../CustomError/CustomError.js";
+import { type AuthRequest } from "../types.js";
 
 const authMiddleware = async (
-  req: Request,
+  req: AuthRequest,
   _res: Response,
   next: NextFunction,
 ) => {
@@ -26,7 +27,7 @@ const authMiddleware = async (
       authId: uid,
     }).exec();
 
-    req.body = user?._id;
+    req.userId = user?._id;
 
     next();
   } catch (error) {
