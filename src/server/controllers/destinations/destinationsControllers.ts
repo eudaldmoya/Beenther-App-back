@@ -21,9 +21,9 @@ export const getDestinations = async (
     res.status(200).json({ destinations });
   } catch (error: unknown) {
     const customError = new CustomError(
-      "Could not retrieve the destinations",
-      404,
       (error as Error).message,
+      404,
+      "Could not retrieve the destinations",
     );
 
     next(customError);

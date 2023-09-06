@@ -17,7 +17,7 @@ const authMiddleware = async (
     const token = req.header("Authorization")?.replace("Bearer ", "");
 
     if (!token) {
-      const error = new CustomError("Unauthorized", 401, "No token provided");
+      const error = new CustomError("No token provided", 401, "Unauthorized");
 
       next(error);
       return;
@@ -34,9 +34,9 @@ const authMiddleware = async (
     next();
   } catch (error) {
     const customError = new CustomError(
-      "Invalid token",
-      403,
       (error as Error).message,
+      403,
+      "Invalid token",
     );
 
     next(customError);
