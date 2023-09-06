@@ -5,6 +5,7 @@ import pingController from "./controllers/pingController/pingController.js";
 import endpointNotFound, { generalErrorHandler } from "./middlewares/errors.js";
 import destinationsRouter from "./routers/destinationsRouter.js";
 import authMiddleware from "./middlewares/auth.js";
+import { destinations, root } from "./utils/paths.js";
 
 const corsConfig = {
   origin: [process.env.ALLOW_ORIGIN_PROD!, process.env.ALLOW_ORIGIN_LOCAL!],
@@ -18,9 +19,11 @@ app.use(cors(corsConfig));
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.get("/", pingController);
+app.get(root, pingController);
 
-app.use("/destinations", authMiddleware, destinationsRouter);
+app.use(authMiddleware);
+
+app.use(destinations, destinationsRouter);
 
 app.use(endpointNotFound);
 app.use(generalErrorHandler);
