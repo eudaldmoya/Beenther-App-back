@@ -13,7 +13,7 @@ beforeEach(() => {
 });
 
 const token = {
-  _id: "token",
+  uid: "token",
 };
 
 describe("Given an auth middleware", () => {
@@ -33,7 +33,7 @@ describe("Given an auth middleware", () => {
 
       const user: UserStructure = {
         _id: id,
-        authId: token._id,
+        authId: token.uid,
         name: "Pablo",
       };
 
@@ -83,6 +83,27 @@ describe("Given an auth middleware", () => {
       await authMiddleware(req as Request, res as Response, next);
 
       expect(next).toHaveBeenCalledWith(error as CustomError);
+    });
+  });
+
+  describe("When it receives a valid token, a response and a next function, but there is no user with the uid that the decoded token has", () => {
+    test("Then the next function should be called with 'Could not find the user'", async () => {
+      const error = new Error("Could not find the user");
+      const req: Partial<Request> = {
+        header: jest.fn().mockReturnValue("token"),
+      };
+
+      admin.auth = jest.fn().mockReturnValue({
+        verifyIdToken: jest.fn().mockResolvedValue(token),
+      });
+
+      User.findOne = jest.fn().mockReturnValue({
+        exec: jest.fn().mockResolvedValue(null),
+      });
+
+      await authMiddleware(req as Request, res as Response, next);
+
+      expect(next).toHaveBeenCalledWith(error);
     });
   });
 });
