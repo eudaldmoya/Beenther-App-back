@@ -48,14 +48,14 @@ describe("Given an auth middleware", () => {
   });
 
   describe("When it receives a request with no token, a response and a next function", () => {
-    test("Then it should call the function next with error 'Unauthorized'", async () => {
+    test("Then it should call the function next with error 'No token provided'", async () => {
       const req: Partial<Request> = {
         header: jest.fn().mockReturnValue(undefined),
       };
       const customError = new CustomError(
-        "Unauthorized",
-        401,
         "No token provided",
+        401,
+        "Unauthorized",
       );
 
       admin.auth = jest.fn().mockReturnValue({
@@ -69,12 +69,12 @@ describe("Given an auth middleware", () => {
   });
 
   describe("When it receives a request with an invalid token, a response and a next function", () => {
-    test("Then it should call the function next with error 'Invalid token'", async () => {
+    test("Then it should call the function next with an error", async () => {
       const req: Partial<Request> = {
         header: jest.fn().mockReturnValue("token"),
       };
 
-      const error = new Error("Invalid token");
+      const error = new Error();
 
       admin.auth = jest.fn().mockReturnValue({
         verifyIdToken: jest.fn().mockRejectedValue(token),

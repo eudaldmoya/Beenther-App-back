@@ -27,8 +27,8 @@ export const generalErrorHandler = (
 ) => {
   debug(chalk.red(error.message));
 
-  const errorMessage = error.message || "Did not work as planned";
-  const errorStatus = error.status || 500;
+  const errorMessage = error.publicMessage ?? "Did not work as planned";
+  const errorStatus = error.status ?? 500;
 
   res.status(errorStatus).json({ error: errorMessage });
 };
