@@ -18,19 +18,19 @@ beforeAll(async () => {
   server = await MongoMemoryServer.create();
   const dburl = server.getUri();
   await connectToDatabase(dburl);
-
-  const token = {
-    uid: authIdMock,
-  };
-
-  admin.auth = jest.fn().mockReturnValue({
-    verifyIdToken: jest.fn().mockResolvedValue(token),
-  });
 });
 
 afterAll(async () => {
   await mongoose.connection.close();
   await server.stop();
+});
+
+const token = {
+  uid: authIdMock,
+};
+
+admin.auth = jest.fn().mockReturnValue({
+  verifyIdToken: jest.fn().mockResolvedValue(token),
 });
 
 describe("Given a GET /destinations endpoint", () => {
