@@ -27,7 +27,18 @@ const authMiddleware = async (
       authId: uid,
     }).exec();
 
-    req.userId = user?._id;
+    if (!user) {
+      const customError = new CustomError(
+        "Could not find the user",
+        404,
+        "Could not find the user",
+      );
+
+      next(customError);
+      return;
+    }
+
+    req.userId = user._id;
 
     next();
   } catch (error) {
