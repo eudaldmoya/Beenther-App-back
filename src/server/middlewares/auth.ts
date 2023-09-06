@@ -12,8 +12,6 @@ const authMiddleware = async (
   next: NextFunction,
 ) => {
   try {
-    console.log(req);
-
     const token = req.header("Authorization")?.replace("Bearer ", "");
 
     if (!token) {

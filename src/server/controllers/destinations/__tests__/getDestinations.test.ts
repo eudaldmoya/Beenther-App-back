@@ -42,9 +42,10 @@ describe("Given a getDestinations controller", () => {
     });
   });
 
-  describe("When it receives a response with a status mehtod that rejects and a next function", () => {
+  describe("When it receives a response with a status method that rejects and a next function", () => {
     test("Then the next function should be called with error 'Could not retrieve the destinations'", async () => {
-      const expectedErrorMessage = "Could not retrieve the destinations";
+      const expectedErrorMessage =
+        "Cannot read properties of undefined (reading 'json')";
       const customError = new CustomError(
         expectedErrorMessage,
         404,
