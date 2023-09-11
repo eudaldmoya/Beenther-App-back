@@ -29,3 +29,34 @@ export const getDestinations = async (
     next(customError);
   }
 };
+
+export const deleteDestination = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { destinationId } = req.params;
+
+    const { acknowledged } = await Destination.deleteOne({
+      _id: destinationId,
+    }).exec();
+
+    if (!acknowledged) {
+      next(
+        new CustomError("Destination not found", 404, "Destination not found"),
+      );
+      return;
+    }
+
+    res.status(200).json({ message: "Destination deleted successfully" });
+  } catch (error: unknown) {
+    const customError = new CustomError(
+      (error as Error).message,
+      404,
+      "Could not delete the destination",
+    );
+
+    next(customError);
+  }
+};
