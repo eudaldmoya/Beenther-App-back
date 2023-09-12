@@ -6,7 +6,10 @@ import app from "..";
 import connectToDatabase from "../../database/connectToDatabase";
 import Destination from "../../database/models/Destination";
 import User from "../../database/models/User";
-import { destinationsMock } from "../../mocks/destinationsMock";
+import {
+  destinationsMock,
+  mongooseIdMockD1,
+} from "../../mocks/destinationsMock";
 import { authIdMock, userMock } from "../../mocks/userMock";
 import { type DestinationStructure } from "../../types";
 
@@ -28,6 +31,11 @@ afterAll(async () => {
 const token = {
   uid: authIdMock,
 };
+
+afterEach(async () => {
+  await Destination.deleteMany();
+  await User.deleteMany();
+});
 
 admin.auth = jest.fn().mockReturnValue({
   verifyIdToken: jest.fn().mockResolvedValue(token),
@@ -59,6 +67,26 @@ describe("Given a GET /destinations endpoint", () => {
           );
         },
       );
+    });
+  });
+});
+
+describe("Given a DELETE destinations/:destinationId enpoint ", () => {
+  describe("When it receives a request with an existant destinationId", () => {
+    test("Then it should respond with status 200 and 'Destination deleted successfully'", async () => {
+      const message = "Destination deleted successfully";
+      const path = `/destinations/${mongooseIdMockD1}`;
+      const expectedStatus = 200;
+
+      await Destination.create(destinationsMock);
+      await User.create(userMock);
+
+      const response = await request(app)
+        .delete(path)
+        .set("Authorization", "Bearer token")
+        .expect(expectedStatus);
+
+      expect(response.body).toHaveProperty("message", message);
     });
   });
 });
