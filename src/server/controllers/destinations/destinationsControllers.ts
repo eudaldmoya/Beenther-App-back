@@ -38,16 +38,7 @@ export const deleteDestination = async (
   try {
     const { destinationId } = req.params;
 
-    const { acknowledged } = await Destination.deleteOne({
-      _id: destinationId,
-    }).exec();
-
-    if (!acknowledged) {
-      next(
-        new CustomError("Destination not found", 404, "Destination not found"),
-      );
-      return;
-    }
+    await Destination.findByIdAndDelete(destinationId).exec();
 
     res.status(200).json({ message: "Destination deleted successfully" });
   } catch (error: unknown) {
