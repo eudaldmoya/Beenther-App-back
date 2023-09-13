@@ -1,8 +1,9 @@
 import { type NextFunction, type Response } from "express";
+
 import Destination from "../../../database/models/Destination.js";
 import { type DestinationStructure } from "../../../types.js";
 import CustomError from "../../CustomError/CustomError.js";
-import { type AuthRequest } from "../../types.js";
+import { type AuthRequest, type AuthRequestWithBody } from "../../types.js";
 
 export const getDestinations = async (
   req: AuthRequest,
@@ -44,8 +45,34 @@ export const deleteDestination = async (
   } catch (error: unknown) {
     const customError = new CustomError(
       (error as Error).message,
-      408,
+      500,
       "Could not delete the destination",
+    );
+
+    next(customError);
+  }
+};
+
+export const addDestination = async (
+  req: AuthRequestWithBody,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const destination = req.body;
+    const _id = req.userId;
+
+    const newDestination = await Destination.create({
+      ...destination,
+      user: _id,
+    });
+
+    res.status(201).json({ destination: newDestination });
+  } catch (error: unknown) {
+    const customError = new CustomError(
+      (error as Error).message,
+      500,
+      "Could not create the destination",
     );
 
     next(customError);
