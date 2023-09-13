@@ -9,6 +9,7 @@ import User from "../../database/models/User";
 import {
   destinationsMock,
   mongooseIdMockD1,
+  newDestinationMock,
 } from "../../mocks/destinationsMock";
 import { authIdMock, userMock } from "../../mocks/userMock";
 import { type DestinationStructure } from "../../types";
@@ -87,6 +88,25 @@ describe("Given a DELETE destinations/:destinationId enpoint ", () => {
         .expect(expectedStatus);
 
       expect(response.body).toHaveProperty("message", message);
+    });
+  });
+});
+
+describe("Given a POST /destinations enpoint ", () => {
+  describe("When it receives a request with a destination 'Angkor Wat'", () => {
+    test("Then it should respond with status 201 and the new destination 'Angkor Wat'", async () => {
+      const path = "/destinations";
+      const expectedStatus = 201;
+
+      await User.create(userMock);
+
+      const response = await request(app)
+        .post(path)
+        .set("Authorization", "Bearer token")
+        .send(newDestinationMock)
+        .expect(expectedStatus);
+
+      expect(response.body).toHaveProperty("destination", newDestinationMock);
     });
   });
 });

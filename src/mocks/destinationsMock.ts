@@ -54,4 +54,5 @@ export const newDestinationMock: DestinationStructure = {
   verticalImageUrl: "vimage.png",
   isVisited: false,
   user: mongooseIdMock,
+  __v: 0,
 };
