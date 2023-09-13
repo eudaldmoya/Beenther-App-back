@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { type DestinationStructure } from "../types";
+import { type ReceivedDestination, type DestinationStructure } from "../types";
 
 export const mongooseIdMock = new mongoose.Types.ObjectId().toString();
 export const mongooseIdMockD1 = new mongoose.Types.ObjectId().toString();
@@ -31,3 +31,27 @@ export const destinationsMock: DestinationStructure[] = [
     user: new mongoose.Types.ObjectId().toString(),
   },
 ];
+
+export const receivedDestinationMock: ReceivedDestination = {
+  name: "Angkor Wat",
+  description:
+    "Angkor Wat, also sometimes written Angkor Vat, is the largest and also the best preserved Hindu temple that makes up the Angkor settlement. It is considered the largest religious structure ever built, and one of the most important archaeological treasures in the world.",
+  location: "Siem Reap",
+  country: "Cambodia",
+  horizontalImageUrl: "himage.png",
+  verticalImageUrl: "vimage.png",
+  isVisited: false,
+};
+
+export const newDestinationMock: DestinationStructure = {
+  _id: mongooseIdMockD1,
+  name: "Angkor Wat",
+  description:
+    "Angkor Wat, also sometimes written Angkor Vat, is the largest and also the best preserved Hindu temple that makes up the Angkor settlement. It is considered the largest religious structure ever built, and one of the most important archaeological treasures in the world.",
+  location: "Siem Reap",
+  country: "Cambodia",
+  horizontalImageUrl: "himage.png",
+  verticalImageUrl: "vimage.png",
+  isVisited: false,
+  user: mongooseIdMock,
+};
