@@ -44,7 +44,7 @@ export const deleteDestination = async (
   } catch (error: unknown) {
     const customError = new CustomError(
       (error as Error).message,
-      404,
+      408,
       "Could not delete the destination",
     );
 
