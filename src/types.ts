@@ -8,6 +8,7 @@ export interface DestinationStructure {
   verticalImageUrl: string;
   isVisited: boolean;
   user: string;
+  __v?: number;
 }
 
 export interface ReceivedDestination {

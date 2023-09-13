@@ -24,6 +24,7 @@ describe("Given an addDestination controller", () => {
       ...receivedDestinationMock,
       user: mongooseIdMock,
       _id: mongooseIdMockD1,
+      __v: 0,
     });
 
     test("Then it should respond with status 201", async () => {
