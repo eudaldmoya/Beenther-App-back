@@ -110,3 +110,22 @@ describe("Given a POST /destinations enpoint ", () => {
     });
   });
 });
+
+describe("Given a GET destinations/:destinationId enpoint ", () => {
+  describe("When it receives a request with an existant destinationId", () => {
+    test("Then it should respond with status 200 and the destination with that destinationId", async () => {
+      const path = `/destinations/${mongooseIdMockD1}`;
+      const expectedStatus = 200;
+
+      await Destination.create(destinationsMock);
+      await User.create(userMock);
+
+      const response = await request(app)
+        .get(path)
+        .set("Authorization", "Bearer token")
+        .expect(expectedStatus);
+
+      expect(response.body).toStrictEqual({ destination: destinationsMock[0] });
+    });
+  });
+});
