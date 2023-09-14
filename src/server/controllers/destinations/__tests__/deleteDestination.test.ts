@@ -15,7 +15,7 @@ describe("Given a getDestinations controller", () => {
   };
   const next: NextFunction = jest.fn();
 
-  describe("when it receives a request with a destinationId: mongooseIdMockD1, a response and a next function", () => {
+  describe("When it receives a request with a destinationId: mongooseIdMockD1, a response and a next function", () => {
     test("Then it should respond with status 200", async () => {
       const expectedStatusCode = 200;
 
