@@ -78,3 +78,27 @@ export const addDestination = async (
     next(customError);
   }
 };
+
+export const getDestinationById = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { destinationId } = req.params;
+
+    const destination = await Destination.findById<DestinationStructure[]>({
+      _id: destinationId,
+    }).exec();
+
+    res.status(200).json({ destination });
+  } catch (error: unknown) {
+    const customError = new CustomError(
+      (error as Error).message,
+      404,
+      "Could not retrieve the destination",
+    );
+
+    next(customError);
+  }
+};
