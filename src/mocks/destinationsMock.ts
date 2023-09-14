@@ -17,6 +17,7 @@ export const destinationsMock: DestinationStructure[] = [
     verticalImageUrl: "vimage.png",
     isVisited: false,
     user: mongooseIdMock,
+    __v: 0,
   },
   {
     _id: mongooseIdMockD2,
@@ -29,6 +30,7 @@ export const destinationsMock: DestinationStructure[] = [
     verticalImageUrl: "vimage.png",
     isVisited: false,
     user: new mongoose.Types.ObjectId().toString(),
+    __v: 0,
   },
 ];
 
