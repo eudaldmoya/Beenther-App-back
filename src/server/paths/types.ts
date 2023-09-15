@@ -3,4 +3,5 @@ export interface Paths {
   destinations: string;
   idToDelete: string;
   idToRetrieve: string;
+  idToUpdate: string;
 }

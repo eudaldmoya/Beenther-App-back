@@ -5,4 +5,5 @@ export const paths: Paths = {
   destinations: "/destinations",
   idToDelete: "/:destinationId",
   idToRetrieve: "/:destinationId",
+  idToUpdate: "/:destinationId",
 };
