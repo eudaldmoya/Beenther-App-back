@@ -117,9 +117,12 @@ export const modifyDestination = async (
       {
         isVisited: !destination.isVisited,
       },
+      {
+        returnDocument: "after",
+      },
     ).exec();
 
-    res.status(204).json({ destination: modifiedDestination });
+    res.status(200).json({ destination: modifiedDestination });
   } catch (error: unknown) {
     const customError = new CustomError(
       (error as Error).message,
