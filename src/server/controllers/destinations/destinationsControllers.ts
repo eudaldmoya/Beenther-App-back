@@ -102,3 +102,31 @@ export const getDestinationById = async (
     next(customError);
   }
 };
+
+export const modifyDestination = async (
+  req: AuthRequestWithBody,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const destination = req.body;
+    const { destinationId } = req.params;
+
+    const modifiedDestination = await Destination.findByIdAndUpdate(
+      destinationId,
+      {
+        isVisited: !destination.isVisited,
+      },
+    );
+
+    res.status(204).json({ destination: modifiedDestination });
+  } catch (error: unknown) {
+    const customError = new CustomError(
+      (error as Error).message,
+      500,
+      "Could not update the destination",
+    );
+
+    next(customError);
+  }
+};
