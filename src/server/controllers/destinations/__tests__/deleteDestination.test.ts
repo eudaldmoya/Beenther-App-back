@@ -3,7 +3,7 @@ import Destination from "../../../../database/models/Destination";
 import { mongooseIdMockD1 } from "../../../../mocks/destinationsMock";
 import { deleteDestination } from "../destinationsControllers";
 
-describe("Given a getDestinations controller", () => {
+describe("Given a deleteDestination controller", () => {
   const req: Partial<Request> = {
     params: {
       destinationId: mongooseIdMockD1,

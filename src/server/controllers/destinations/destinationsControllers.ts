@@ -117,7 +117,7 @@ export const modifyDestination = async (
       {
         isVisited: !destination.isVisited,
       },
-    );
+    ).exec();
 
     res.status(204).json({ destination: modifiedDestination });
   } catch (error: unknown) {

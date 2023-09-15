@@ -45,7 +45,7 @@ describe("Given an addDestination controller", () => {
   });
 
   describe("when it receives a request without a destinationId, a response and a next function", () => {
-    test("Then the next function should be called with 'Could not delete the destination'", async () => {
+    test("Then the next function should be called with 'Could not add the destination'", async () => {
       const error = new Error();
 
       Destination.create = jest.fn().mockRejectedValue({});
