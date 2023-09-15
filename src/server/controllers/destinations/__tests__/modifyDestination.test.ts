@@ -37,8 +37,8 @@ describe("Given a getDestinations controller", () => {
   });
 
   describe("When it receives a request with a destinationId: mongooseIdMockD1 and a destination 'Lake Louise', a response and a next function", () => {
-    test("Then it should respond with status 204", async () => {
-      const expectedStatusCode = 204;
+    test("Then it should respond with status 200", async () => {
+      const expectedStatusCode = 200;
 
       await modifyDestination(req as Request, res as Response, next);
 

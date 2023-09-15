@@ -129,3 +129,26 @@ describe("Given a GET destinations/:destinationId enpoint ", () => {
     });
   });
 });
+
+describe("Given a PATCH destinations/:destinationId enpoint ", () => {
+  describe("When it receives a request with an existant destinationId louiseId and the destination 'Lake Louise'", () => {
+    test("Then it should respond with status 204 and the destination modified", async () => {
+      const path = `/destinations/${mongooseIdMockD1}`;
+      const expectedStatus = 200;
+
+      await Destination.create(destinationsMock);
+      await User.create(userMock);
+
+      const response = await request(app)
+        .patch(path)
+        .set("Authorization", "Bearer token")
+        .send(destinationsMock[0])
+        .expect(expectedStatus);
+
+      expect(response.body).toHaveProperty("destination", {
+        ...destinationsMock[0],
+        isVisited: true,
+      });
+    });
+  });
+});
