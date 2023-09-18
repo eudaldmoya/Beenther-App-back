@@ -132,7 +132,7 @@ describe("Given a GET destinations/:destinationId enpoint ", () => {
 
 describe("Given a PATCH destinations/:destinationId enpoint ", () => {
   describe("When it receives a request with an existant destinationId louiseId and the destination 'Lake Louise'", () => {
-    test.only("Then it should respond with status 204 and the destination modified", async () => {
+    test("Then it should respond with status 204 and the destination modified", async () => {
       const path = `/destinations/${mongooseIdMockD1}`;
       const expectedStatus = 200;
 
