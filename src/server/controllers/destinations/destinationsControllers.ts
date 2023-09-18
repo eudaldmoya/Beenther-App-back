@@ -3,7 +3,11 @@ import { type NextFunction, type Response } from "express";
 import Destination from "../../../database/models/Destination.js";
 import { type DestinationStructure } from "../../../types.js";
 import CustomError from "../../CustomError/CustomError.js";
-import { type AuthRequest, type AuthRequestWithBody } from "../../types.js";
+import {
+  type AuthRequestWithBooleanBody,
+  type AuthRequest,
+  type AuthRequestWithBody,
+} from "../../types.js";
 
 export const getDestinations = async (
   req: AuthRequest,
@@ -104,18 +108,18 @@ export const getDestinationById = async (
 };
 
 export const modifyDestination = async (
-  req: AuthRequestWithBody,
+  req: AuthRequestWithBooleanBody,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    const destination = req.body;
+    const { isVisited } = req.body;
     const { destinationId } = req.params;
 
     const modifiedDestination = await Destination.findByIdAndUpdate(
       destinationId,
       {
-        isVisited: !destination.isVisited,
+        isVisited: !isVisited,
       },
       {
         returnDocument: "after",

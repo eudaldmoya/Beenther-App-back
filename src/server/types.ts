@@ -13,3 +13,12 @@ export interface AuthRequestWithBody
   > {
   userId?: string;
 }
+
+export interface AuthRequestWithBooleanBody
+  extends Request<
+    Record<string, unknown>,
+    Record<string, unknown>,
+    { isVisited: boolean }
+  > {
+  userId?: string;
+}
