@@ -17,7 +17,7 @@ app.disable("x-powered-by");
 app.use(cors(corsConfig));
 
 app.use(morgan("dev"));
-app.use(express.json());
+app.use(express.json(), express.text());
 
 app.get(paths.root, pingController);
 
