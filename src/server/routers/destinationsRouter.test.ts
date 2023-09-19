@@ -142,7 +142,7 @@ describe("Given a PATCH destinations/:destinationId enpoint ", () => {
       const response = await request(app)
         .patch(path)
         .set("Authorization", "Bearer token")
-        .send({ isVisited: false })
+        .send("false")
         .expect(expectedStatus);
 
       expect(response.body).toHaveProperty("destination", {
