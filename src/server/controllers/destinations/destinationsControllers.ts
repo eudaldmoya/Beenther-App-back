@@ -4,9 +4,9 @@ import Destination from "../../../database/models/Destination.js";
 import { type DestinationStructure } from "../../../types.js";
 import CustomError from "../../CustomError/CustomError.js";
 import {
-  type AuthRequestWithBooleanBody,
   type AuthRequest,
   type AuthRequestWithBody,
+  type AuthRequestWithBooleanBody,
 } from "../../types.js";
 
 export const getDestinations = async (
@@ -113,7 +113,7 @@ export const modifyDestination = async (
   next: NextFunction,
 ) => {
   try {
-    const { isVisited } = req.body;
+    const isVisited = req.body === "true";
     const { destinationId } = req.params;
 
     const modifiedDestination = await Destination.findByIdAndUpdate(
