@@ -3,6 +3,8 @@ import { type ReceivedDestination } from "../types";
 
 export interface AuthRequest extends Request {
   userId?: string;
+  email?: string;
+  uid?: string;
 }
 
 export interface AuthRequestWithBody
