@@ -21,24 +21,24 @@ const authMiddleware = async (
       return;
     }
 
-    const { uid } = await admin.auth(firebaseApp).verifyIdToken(token);
+    const { uid, email } = await admin.auth(firebaseApp).verifyIdToken(token);
 
     const user = await User.findOne<UserStructure>({
       authId: uid,
     }).exec();
 
     if (!user) {
-      const customError = new CustomError(
-        "Could not find the user",
-        404,
-        "Could not find the user",
-      );
+      const newUser = await User.create({
+        name: email,
+        authId: uid,
+      });
+      req.userId = newUser._id;
 
-      next(customError);
+      next();
       return;
     }
 
-    req.userId = user._id;
+    req.userId = user?._id;
 
     next();
   } catch (error) {
